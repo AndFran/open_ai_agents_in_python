@@ -35,8 +35,14 @@ nutrition_agent = Agent(
 
 async def run_agent():
     with trace("Simple nutrition agent"):
-        result = await Runner.run(nutrition_agent, "How healthy are bananas?")
-    print(result)
+        #result = await Runner.run(nutrition_agent, "How healthy are bananas?")
+
+        response_stream = Runner.run_streamed(nutrition_agent, "How healthy are bananas?")
+        async for response in response_stream.stream_events():
+            if response.type == "raw_response_event" and isinstance(response.data, ResponseTextDeltaEvent):
+                print(response.data.delta, end="", flush=True)
+
+    #print(result)
 
 asyncio.run(run_agent())
 
