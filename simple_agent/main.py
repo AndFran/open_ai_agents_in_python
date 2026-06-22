@@ -20,7 +20,6 @@ r = OpenAI().responses.create(
 ).output_text
 
 print(r)
-
 print("-"*100)
 
 # an agent needs a name and instructions (a prompt)
@@ -32,7 +31,7 @@ nutrition_agent = Agent(
     """
 )
 
-# an agent needs a runner, which is ASYNC
+# an agent needs a runner, which is ASYNC and takes the prompt
 
 async def run_agent():
     with trace("Simple nutrition agent"):
