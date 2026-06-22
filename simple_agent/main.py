@@ -54,16 +54,15 @@ async def run_agent():
         instructions="""
         You are a helpful assistant giving out nutrition advice.
         You give concise answers.
+        Use can use the tool get_food_calories_tool to try and find the calories of given foods but 
+        passing in the food name. 
         """,
         tools=[get_food_calories_tool],
     )
 
     with trace("Simple nutrition agent"):
-        result = await Runner.run(nutrition_agent, "How many calories in an apple?")
+        result = await Runner.run(nutrition_agent, "How many calories in an apple and a banana?")
         print(result)
-
-       
-
 
 
 
@@ -72,3 +71,16 @@ def main():
     asyncio.run(run_agent())
 
 main()
+
+
+
+
+
+
+
+
+
+
+
+
+
